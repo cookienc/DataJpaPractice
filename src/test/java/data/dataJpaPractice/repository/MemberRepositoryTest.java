@@ -38,23 +38,28 @@ class MemberRepositoryTest {
 	@DisplayName("저장_후_비교_한다")
 	@Test
 	void 저장_후_비교_한다() {
-		log.info("홍길동이 비영속 상태 인가요? {}", entityInformation.isNew(홍길동));
-		log.info("홍길동 ID = {}", 홍길동.getId());
+//		log.info("홍길동이 비영속 상태 인가요? {}", entityInformation.isNew(홍길동));
+//		log.info("홍길동 ID = {}", 홍길동.getId());
+//
+//		Member 결과 = memberRepository.save(홍길동);
 
-		Member 결과 = memberRepository.save(홍길동);
+		Member 길동 = new Member("길동");
+		Member 결과 = memberRepository.save(길동);
 
-		assertThat(결과).isEqualTo(홍길동);
+		assertThat(결과).isEqualTo(길동);
 	}
 
 	@DisplayName("회원_찾기")
 	@Test
-	void find() {
-		log.info("홍길동이 비영속 상태 인가요? {}", entityInformation.isNew(홍길동));
-		log.info("홍길동 ID = {}", 홍길동.getId());
-
-		Member 저장됨 = memberRepository.save(홍길동);
+	void 찾기() {
+//		log.info("홍길동이 비영속 상태 인가요? {}", entityInformation.isNew(홍길동));
+//		log.info("홍길동 ID = {}", 홍길동.getId());
+//
+//		Member 저장됨 = memberRepository.save(홍길동);
+		Member 길동 = new Member("길동");
+		Member 저장됨 = memberRepository.save(길동);
 		Optional<Member> 결과 = memberRepository.findById(저장됨.getId());
 
-		assertThat(결과).hasValue(홍길동);
+		assertThat(결과).hasValue(길동);
 	}
 }
