@@ -62,4 +62,15 @@ class MemberRepositoryTest {
 
 		assertThat(결과).hasValue(길동);
 	}
+
+	@DisplayName("삭제 테스트")
+	@Test
+	void removed() {
+		Member 홍길동 = memberRepository.save(new Member("홍길동"));
+
+		Long id = 홍길동.getId();
+		memberRepository.deleteById(id);
+
+		assertThat(memberRepository.findById(id));
+	}
 }
