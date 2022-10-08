@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.assertThatCode;
 
 @SpringBootTest
 class MemberRepositoryTest {
@@ -89,7 +89,7 @@ class MemberRepositoryTest {
 
 		//when
 		//then
-		assertThatThrownBy(() -> memberService.deleteAndSave(List.of(
+		assertThatCode(() -> memberService.deleteAndSave(List.of(
 				new Member("홍길동"),
 				new Member("김철수"),
 				new Member("이영희")

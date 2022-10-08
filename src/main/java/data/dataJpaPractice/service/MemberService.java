@@ -16,7 +16,7 @@ public class MemberService {
 	private final MemberRepository memberRepository;
 
 	public void deleteAndSave(List<Member> members) {
-		memberRepository.deleteAll();
+		memberRepository.deleteAllInBatch();
 		memberRepository.saveAll(members);
 	}
 }
