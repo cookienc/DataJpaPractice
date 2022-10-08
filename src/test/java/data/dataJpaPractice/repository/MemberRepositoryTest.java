@@ -1,6 +1,7 @@
 package data.dataJpaPractice.repository;
 
 import data.dataJpaPractice.model.Member;
+import data.dataJpaPractice.service.MemberService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,15 +14,20 @@ import org.springframework.data.jpa.repository.support.JpaEntityInformationSuppo
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @SpringBootTest
 class MemberRepositoryTest {
 
 	@Autowired
 	private MemberRepository memberRepository;
+
+	@Autowired
+	private MemberService memberService;
 
 	@PersistenceContext
 	private EntityManager em;
@@ -72,5 +78,21 @@ class MemberRepositoryTest {
 		memberRepository.deleteById(id);
 
 		assertThat(memberRepository.findById(id));
+	}
+
+	@DisplayName("삭제 후 저장 테스트")
+	@Test
+	void 삭제_후_저장_테스트() {
+		//given
+		memberRepository.save(new Member("홍길동"));
+		memberRepository.save(new Member("김철수"));
+
+		//when
+		//then
+		assertThatThrownBy(() -> memberService.deleteAndSave(List.of(
+				new Member("홍길동"),
+				new Member("김철수"),
+				new Member("이영희")
+		))).doesNotThrowAnyException();
 	}
 }
